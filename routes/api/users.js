@@ -3,6 +3,7 @@ const router = express.Router()
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const passport = require('passport')
+const gravatar = require('gravatar') 
 
 // Load input validation
 const validationRegisterInput = require("../../validation/register")

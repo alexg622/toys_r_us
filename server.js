@@ -3,11 +3,14 @@ const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const passport = require('passport')
 const users = require('./routes/api/users')
-
+const db = require('./.git/keys').mongoURI
 const app = express()
 
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
+
+mongoose.connect(db).then(() => console.log("mongoDB is connected")).catch(err => console.log(err))
+
 
 app.get('/test', (req, res) => res.send("working"))
 
