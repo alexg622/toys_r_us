@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const passport = require('passport')
 const users = require('./routes/api/users')
+const toys = require('./routes/api/toys')
 const db = require('./.git/keys').mongoURI
 const app = express()
 
@@ -15,6 +16,7 @@ mongoose.connect(db).then(() => console.log("mongoDB is connected")).catch(err =
 app.get('/test', (req, res) => res.send("working"))
 
 app.use('/api/users', users)
+app.use('/api/toys', toys)
 
 const port = process.env.PORT || 5000
 

@@ -16,7 +16,7 @@ const ToySchema = new Schema({
   description: {
     type: String,
     required: true
-  }
+  }, 
   reviews: [
     {
       user: {
@@ -24,12 +24,10 @@ const ToySchema = new Schema({
         ref: 'users'
       },
       review: {
-        type: String,
-        required: true
+        type: String
       },
       stars: {
-        type: Number,
-        required: true
+        type: Number
       }
     }
   ],
