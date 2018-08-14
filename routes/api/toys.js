@@ -83,4 +83,30 @@ passport.authenticate('jwt', { session: false }),
     .catch(err => res.status(404).json({ toynotfound: "No toy with that ID found"}))
 })
 
+// add toy to users cart
+router.post('/:toyId/cart',
+passport.authenticate('jwt', { session: false }),
+(req, res) => {
+  User.findById(req.user.id).then(user => {
+    Toy.findById(req.params.toyId).then(toy => {
+      user.cart.unshift(toy)
+      user.save()
+      res.json(user)
+    })
+  })
+})
+
+// purchase toy
+router.post('/:toyId/purchase',
+passport.authenticate('jwt', { session: false }),
+(req, res) => {
+  User.findById(req.user.id).then(user => {
+    Toy.findById(req.params.toyId).then(toy => {
+      user.toys.unshift(toy)
+      user.save()
+      res.json(user)
+    })
+  })
+})
+
 module.exports = router
