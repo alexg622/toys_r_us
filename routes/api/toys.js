@@ -96,6 +96,21 @@ passport.authenticate('jwt', { session: false }),
   })
 })
 
+// remove toy from cart
+router.delete('/:toyId/cart',
+passport.authenticate('jwt', { session: false }),
+(req, res) => {
+  User.findById(req.user.id).then(user => {
+    let index
+    user.cart.map((toy, idx) => {
+      if (toy === req.params.toyId) index = idx
+      user.cart.splice(index, 1)
+      user.save()
+      res.json(user)
+    })
+  })
+})
+
 // purchase toy
 router.post('/:toyId/purchase',
 passport.authenticate('jwt', { session: false }),
