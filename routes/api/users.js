@@ -73,7 +73,7 @@ router.post('/login', (req, res) => {
     // check for user
     if (!user) {
       errors.email = "User not found"
-      return req.status(404).json(errors)
+      return res.status(404).json(errors)
     }
 
     // Check password
@@ -85,7 +85,7 @@ router.post('/login', (req, res) => {
         jwt.sign(
           payload,
           keys.secretOrKey,
-          { exporesIn: 3600 },
+          { expiresIn: 3600 },
           (err, token) => {
             res.json({
               success: true,
