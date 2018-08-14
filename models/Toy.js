@@ -24,10 +24,12 @@ const ToySchema = new Schema({
         ref: 'users'
       },
       review: {
-        type: String
+        type: String,
+        required: true 
       },
       stars: {
-        type: Number
+        type: String,
+        required: true
       }
     }
   ],

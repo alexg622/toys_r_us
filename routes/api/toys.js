@@ -4,7 +4,7 @@ const passport = require('passport')
 const Toy = require('../../models/Toy')
 const User = require('../../models/User')
 const validateToyInput = require('../../validation/toy')
-
+const validateReviewInput = require('../../validation/review')
 // test
 router.get('/test', (req, res) => res.json({msg: "toys working"}))
 
@@ -13,7 +13,7 @@ router.get('/test', (req, res) => res.json({msg: "toys working"}))
 router.get('/', (req, res) => {
   Toy.find()
     .then(toys => res.json(toys))
-    .catch(err => res.status).json({ notoysfound: "No toys found"})
+    .catch(err => res.status.json({ notoysfound: "No toys found"}))
 })
 
 // get toy
@@ -63,7 +63,7 @@ router.delete('/:toyId', (req, res) => {
 router.post('/:toyId/reviews',
 passport.authenticate('jwt', { session: false }),
 (req, res) => {
-  const {errors, isValid} = validateToyInput(req.body)
+  const {errors, isValid} = validateReviewInput(req.body)
 
   if (!isValid) {
     return res.status(400).json(errors)
@@ -72,9 +72,9 @@ passport.authenticate('jwt', { session: false }),
   Toy.findById(req.params.toyId)
     .then(toy => {
       const newReview = {
-        user: req.user.id,
         review: req.body.review,
-        starts: req.body.stars
+        stars: req.body.stars,
+        user: req.user.id
       }
 
       toy.reviews.unshift(newReview)
