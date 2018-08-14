@@ -7,8 +7,8 @@ const gravatar = require('gravatar')
 const keys = require('../../.git/keys')
 
 // Load input validation
-const validationRegisterInput = require("../../validation/register")
-const validationLoginInput = require('../../validation/login')
+const validateRegisterInput = require("../../validation/register")
+const validateLoginInput = require('../../validation/login')
 
 // Load user model
 const User = require('../../models/User')
@@ -109,7 +109,7 @@ router.get(
     res.json({
       id: req.user.id,
       name: req.user.name,
-      email: req.user.email 
+      email: req.user.email
     })
   }
 )
