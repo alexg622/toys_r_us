@@ -8,7 +8,6 @@ const validateReviewInput = require('../../validation/review')
 // test
 router.get('/test', (req, res) => res.json({msg: "toys working"}))
 
-
 // get toys
 router.get('/', (req, res) => {
   Toy.find()
