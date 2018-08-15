@@ -9,7 +9,7 @@ import setAuthToken from './utils/set_auth_token'
 import { setCurrentUser } from './actions/auth_actions'
 import Navbar from './components/navbar'
 import store from './store'
-import './App.css';
+import './styles/navbar.css';
 
 if(localStorage.jwtToken) {
   setAuthToken(localStorage.jwtToken)
@@ -24,7 +24,7 @@ class App extends Component {
       <Provider store={ store }>
         <Router>
           <div className="App">
-            <Navbar /> 
+            <Navbar />
             <Route exact path="/" component={ Landing }/>
             <Route exact path='/register' component={Register}/>
             <Route exact path='/login' component={Login}/>

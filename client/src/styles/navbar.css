@@ -1,0 +1,139 @@
+html, body, header, nav, h1, a, ul, li,
+strong, main, button, i, section, img, div, h2,
+p, form, fieldset, label, input, textarea, span, article, footer, time, small {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font: inherit;
+    color: inherit;
+    text-align: inherit;
+    text-decoration: inherit;
+    vertical-align: inherit;
+    box-sizing: inherit;
+    background: transparent;
+  }
+ul {
+  list-style: none;
+}
+
+
+.navbar {
+  width: 100%;
+  background: red; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(left, orange , yellow, green, cyan, blue, violet); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(right, orange, yellow, green, cyan, blue, violet); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(right, orange, yellow, green, cyan, blue, violet); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to right, orange , yellow, green, cyan, blue, violet); /* Standard syntax (must be last) */
+  display: flex;
+  height: 75px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logout-button {
+  font-family: "Comic Sans MS";
+  font-size: 25px;
+  color: black;
+}
+
+.authLinks {
+  display: flex;
+  justify-content: space-between;
+}
+
+.login-button {
+  font-family: "Comic Sans MS";
+  font-size: 25px;
+  color: black;
+}
+
+.register-button {
+  font-family: "Comic Sans MS";
+  font-size: 25px;
+  color: black;
+  margin-left: 15px;
+}
+
+.logout-button:hover {
+  color: orange;
+}
+
+.login-button:hover {
+  color: orange;
+}
+
+.register-button:hover {
+  color: orange;
+}
+
+.auth-buttons {
+  margin-right: 3%;
+}
+
+.logo {
+  margin-left: 3%;
+}
+
+.letters {
+  display: flex;
+  justify-content: space-between;
+}
+
+.T {
+  transform: rotate(-25deg);
+  color: purple;
+}
+
+.O {
+  color: red;
+}
+
+.mark {
+  color: red;
+}
+
+.Y {
+  color: red;
+}
+
+.four {
+  transform: rotate(10deg);
+}
+
+#S {
+  margin-left: 0px;
+}
+
+#four {
+  margin-left: 3px;
+  color: blue;
+  font-size: 35px;
+}
+
+.U {
+  color: orange;
+}
+
+.S {
+  color: lightgreen;
+}
+
+.letters li {
+  font-family: "Comic Sans MS";
+  font-size: 30px;
+  font-weight: 800;
+}
+
+#U {
+  margin-left: 12px;
+  transform: rotate(10deg);
+}
+
+#two-S {
+  transform: rotate(-10deg);
+}
+
+.letters li:not(:first-child) {
+  margin-left: 6px;
+}
