@@ -10,7 +10,8 @@ import { setCurrentUser } from './actions/auth_actions'
 import Navbar from './components/navbar'
 import store from './store'
 import './styles/navbar.css';
-import './styles/auth_forms.css';
+import './styles/login_form.css';
+import './styles/register_form.css';
 
 if(localStorage.jwtToken) {
   setAuthToken(localStorage.jwtToken)

@@ -51,7 +51,7 @@ class Login extends React.Component{
     }
     return(
       <div>
-        <ul>
+        <ul className="errors">
           {divErrors}
         </ul>
         <form className="login-form" onSubmit={this.handleSubmit}>

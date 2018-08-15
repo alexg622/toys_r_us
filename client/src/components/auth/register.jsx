@@ -50,14 +50,17 @@ class Register extends React.Component{
     }
     return(
       <div>
-        <ul>
+        <ul className="errors">
           {divErrors}
         </ul>
-        <form onSubmit={this.handleSubmit}>
+        <form className="register-form" onSubmit={this.handleSubmit}>
+          <placeholder>Name:</placeholder>
           <input placeholder="name" type="text" value={this.state.name} onChange={this.update("name")}/>
+          <placeholder>Email:</placeholder>
           <input placeholder="email" type="email" value={this.state.email} onChange={this.update("email")}/>
+          <placeholder class-Name="password-placeholder">Password</placeholder>
           <input placeholder="password" type="password" value={this.state.password} onChange={this.update("password")}/>
-          <input type="submit" value="Create Account"/>
+          <input id="register-submit" type="submit" value="Create Account"/>
         </form>
       </div>
     )
