@@ -1,2 +1,6 @@
 export const GET_ERRORS = "GET_ERRORS"
 export const SET_CURRENT_USER = "SET_CURRENT_USER"
+export const GET_TOYS = "GET_TOYS"
+export const GET_TOY = "GET_TOY"
+export const DELETE_TOY = "DELETE_TOY"
+export const ADD_TOY = "ADD_TOY"

@@ -9,9 +9,12 @@ import setAuthToken from './utils/set_auth_token'
 import { setCurrentUser } from './actions/auth_actions'
 import Navbar from './components/navbar'
 import store from './store'
+import CreateToyForm from './components/toy/create_toy_form'
 import './styles/navbar.css';
 import './styles/login_form.css';
 import './styles/register_form.css';
+import './styles/create_toy_form.css';
+import './styles/landing.css';
 
 if(localStorage.jwtToken) {
   setAuthToken(localStorage.jwtToken)
@@ -30,6 +33,7 @@ class App extends Component {
             <Route exact path="/" component={ Landing }/>
             <Route exact path='/register' component={Register}/>
             <Route exact path='/login' component={Login}/>
+            <Route exact path='/toys/new' component={CreateToyForm} />
           </div>
         </Router>
       </Provider>

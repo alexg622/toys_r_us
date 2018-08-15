@@ -15,11 +15,11 @@ class Navbar extends React.Component {
     )
   }
   render() {
-    const { isAuthenticated, user } = this.props.auth
+    const { isAuthenticated } = this.props.auth
     const logout = <button className="logout-button" onClick={this.props.logoutUser}>Logout</button>
     return (
       <div className="navbar">
-        <div className="logo">
+        <Link to="/" className="logo">
           <ul className='letters'>
             <li className="T">T</li>
             <li className="O">O</li>
@@ -29,7 +29,7 @@ class Navbar extends React.Component {
             <li id="U" className="U">U</li>
             <li id="two-S" className="S">S</li>
           </ul>
-        </div>
+        </Link>
         <div className="auth-buttons">
           {isAuthenticated ? logout : this.authLinks()}
         </div>

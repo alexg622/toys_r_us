@@ -7,6 +7,7 @@ module.exports = function validateToyInput(data) {
   data.description = !isEmpty(data.description) ? data.description : ""
   data.price = !isEmpty(data.price) ? data.price : ""
   data.name = !isEmpty(data.name) ? data.name : ""
+  data.avatar = !isEmpty(data.avatar) ? data.avatar : ""
 
   if (Validator.isEmpty(data.description)) {
     errors.description = 'Please fill in a description'
@@ -20,8 +21,12 @@ module.exports = function validateToyInput(data) {
     errors.name = "Please fill in a name"
   }
 
+  if (Validator.isEmpty(data.avatar)) {
+    errors.avatar = "Please fill in a name"
+  }
+
   return {
     errors,
-    isValid: isEmpty(errors) 
+    isValid: isEmpty(errors)
   }
 }

@@ -1,4 +1,4 @@
-.register-form {
+.create-toy-form {
   display: flex;
   flex-direction: column;
   justify-content: space;
@@ -8,11 +8,11 @@
   font-weight: 700;
 }
 
-.register-form label:first-child {
+.create-toy-form label:first-child {
   margin-top: 20px;
 }
 
-.register-form input{
+.create-toy-form input{
   border: 2px solid black;
   /* border-radius: 25px; */
   /* text-align: center; */
@@ -26,29 +26,19 @@
   margin-top: 5px;
 }
 
-.errors {
-  font-family: "Comic Sans MS";
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: red;
-  margin-top: 10px;
-
-}
-
-.register-form input[value="email"]{
+.create-toy-form input[value="email"]{
   margin-left: 10px;
 }
 
-.register-form input:hover{
+.create-toy-form input:hover{
   border: 2px solid lightblue;
 }
 
-.register-form input:not(first-child){
+.create-toy-form input:not(first-child){
   margin-top: 10px;
 }
 
-#register-submit{
+#create-toy-submit{
   width: 250px;
   margin-top: 15px;
   background: orange;
@@ -56,7 +46,7 @@
   transition: background 1s;
 }
 
-#register-submit:hover{
+#create-toy-submit:hover{
   background: violet;
   border: 2px solid black;
 }

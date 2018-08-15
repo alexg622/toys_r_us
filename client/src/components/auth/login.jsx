@@ -55,9 +55,9 @@ class Login extends React.Component{
           {divErrors}
         </ul>
         <form className="login-form" onSubmit={this.handleSubmit}>
-          <placeholder>Email:</placeholder>
+          <label>Email:</label>
            <input placeholder="email" type="email" value={this.state.email} onChange={this.update("email")}/>
-          <placeholder className="password-placeholder">Password:</placeholder>
+          <label className="password-label">Password:</label>
           <input placeholder="password" type="password" value={this.state.password} onChange={this.update("password")}/>
           <input id="login-submit" type="submit" value="Login"/>
         </form>

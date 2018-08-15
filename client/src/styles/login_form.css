@@ -8,7 +8,7 @@
   font-weight: 700;
 }
 
-.login-form placeholder:first-child {
+.login-form label:first-child {
   margin-top: 20px;
 }
 
@@ -22,7 +22,7 @@
   transition: border .5s;
 }
 
-.password-placeholder {
+.password-label {
   margin-top: 5px;
 }
 
