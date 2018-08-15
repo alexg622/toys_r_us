@@ -35,17 +35,24 @@ ul {
   font-family: "Comic Sans MS";
   font-size: 25px;
   color: black;
+  transition: color 1.5s;
+
 }
 
 .authLinks {
   display: flex;
   justify-content: space-between;
+  height: 75px;
 }
 
 .login-button {
   font-family: "Comic Sans MS";
   font-size: 25px;
   color: black;
+  transition: color 1.5s;
+  border-right: 1px solid black;
+  padding-top: 15px;
+  padding-right: 15px;
 }
 
 .register-button {
@@ -53,6 +60,10 @@ ul {
   font-size: 25px;
   color: black;
   margin-left: 15px;
+  transition: color 1.5s;
+  padding-top: 15px;
+
+
 }
 
 .logout-button:hover {
@@ -69,6 +80,7 @@ ul {
 
 .auth-buttons {
   margin-right: 3%;
+  /* height: 100%; */
 }
 
 .logo {

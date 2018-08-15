@@ -10,7 +10,7 @@ class Navbar extends React.Component {
     return (
       <div className="authLinks">
         <Link className="login-button" to='/login'>Login</Link>
-        <Link className="register-button" to='/login'>Register</Link>
+        <Link className="register-button" to='/register'>Register</Link>
       </div>
     )
   }
