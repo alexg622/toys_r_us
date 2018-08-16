@@ -1,4 +1,4 @@
-import { SET_CURRENT_USER, ADD_TOY_TO_CART } from '../actions/types'
+import { SET_CURRENT_USER, ADD_TOY_TO_CART, REMOVE_TOY_FROM_CART } from '../actions/types'
 import isEmpty from '../validation/is-empty'
 
 const initialState = {
@@ -15,6 +15,12 @@ export default function(state = initialState, action) {
         user: action.payload
       }
     case ADD_TOY_TO_CART:
+      return {
+        ...state,
+        isAuthenticated: !isEmpty(action.payload),
+        user: action.payload
+      }
+    case REMOVE_TOY_FROM_CART:
       return {
         ...state,
         isAuthenticated: !isEmpty(action.payload),

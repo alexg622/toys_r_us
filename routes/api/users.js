@@ -109,7 +109,9 @@ router.get(
     res.json({
       id: req.user.id,
       name: req.user.name,
-      email: req.user.email
+      email: req.user.email,
+      cart: req.user.cart,
+      toys: req.user.toys
     })
   }
 )

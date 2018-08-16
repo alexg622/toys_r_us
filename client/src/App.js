@@ -16,6 +16,7 @@ import './styles/login_form.css';
 import './styles/register_form.css';
 import './styles/create_toy_form.css';
 import './styles/landing.css';
+import './styles/userCart.css';
 
 if(localStorage.jwtToken) {
   setAuthToken(localStorage.jwtToken)

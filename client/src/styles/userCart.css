@@ -24,7 +24,6 @@
 
 .buy-me {
   transition: color 2s;
-  width: 77px; 
 }
 
 .buy-div{
@@ -50,12 +49,12 @@
   padding-top: 5px;
 }
 
-.landing-div {
+.userCart-div {
   display: flex;
   /* padding-top: 10px; */
   justify-content: space-between;
   padding-bottom: 10px;
-  width: 80%;
+  width: 100%;
   border-bottom: 2px solid black;
   background: white;
   height: 350px;
@@ -112,16 +111,62 @@
   cursor: pointer;
 }
 
+.purchase{
+  background: orange;
+  transition: background 1s;
+  border-radius: 25px 25px;
+  width: 200px;
+  text-align: center;
+  height: 50px;
+}
+
+.purchase:hover{
+  background: lightgreen;
+  cursor: pointer;
+
+}
+
+.userCart-container{
+  display: flex;
+  width: 100%;
+  background: lightgray;
+  justify-content: flex-start;
+}
+
 .img-links {
   display: flex;
   flex-direction: column;
   height: 350px;
 }
 
-.list-of-toys {
+.checkout{
+  background: lightgray;
+  color: red;
+  font-family: "Comic Sans MS";
+  width: 35%;
+  height: 350px;
+  font-size: 30px;
   display: flex;
+  justify-content: center;
+}
+
+.checkout-items{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
+  width: 78%;
+  height: 56%;
+  align-self: center;
+  border: 1px solid black;
+  background: white;
+}
+
+.list-of-toys-cart {
+  display: flex;
+  align-items: end;
   flex-direction: column;
   background: lightgray;
-  font-family: "Comic Sans MS"
+  font-family: "Comic Sans MS";
+  width: 65%;
 }

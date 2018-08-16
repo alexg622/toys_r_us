@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { getToys } from "../actions/toy_actions"
-import { addToyToCart } from "../actions/auth_actions"
+import { addToyToCart, clearErrors, haveItem } from "../actions/auth_actions"
 import PropTypes from 'prop-types'
 
 
@@ -15,6 +15,7 @@ class Landing extends React.Component{
 
   componentDidMount(){
     this.props.getToys()
+    this.props.clearErrors()
     setTimeout(this.rotatePriceColor, 1000)
   }
 
@@ -36,31 +37,53 @@ rotatePriceColor() {
       const element = e.target
       const classL = element.classList.value
       const color = element.style.color
-      this.props.addToyToCart(e.target.id).then(res => {
-        if (res.type === "GET_ERRORS") {
-          element.classList.value = "animated inifite bounce wink far fa-frown fa-2x"
-          element.style.color = "red"
-          setTimeout(() => {
-            element.classList.value = classL
-            element.style.color = color
-          }, 3000)
-          setTimeout(() => {
-            let theError = document.querySelector(".errors")
-            if(!theError) return
-            theError.remove()
-          }, 7000)
-        } else {
-          element.classList.value = "animated inifite bounce wink far fa-smile-wink fa-2x"
-          setTimeout(() => {
-            element.classList.value = classL
-          }, 3000)
-        }
-      })
+      let counter = false
+      if(this.props.auth.user.cart !== undefined){
+        this.props.auth.user.cart.forEach(toy => {
+          if(String(toy._id) === String(e.target.id)) counter = true
+        })
+      }
+      if(counter){
+        this.props.haveItem()
+        element.classList.value = "animated inifite bounce wink far fa-frown fa-2x"
+        element.style.color = "red"
+        setTimeout(() => {
+          element.classList.value = classL
+          element.style.color = color
+        }, 3000)
+        setTimeout(() => {
+          let theError = document.querySelector(".errors")
+          if(!theError) return
+          this.props.clearErrors()
+        }, 7000)
+      } else {
+        this.props.addToyToCart(e.target.id).then(res => {
+          if (res.type === "GET_ERRORS") {
+            element.classList.value = "animated inifite bounce wink far fa-frown fa-2x"
+            element.style.color = "red"
+            setTimeout(() => {
+              element.classList.value = classL
+              element.style.color = color
+            }, 3000)
+            setTimeout(() => {
+              let theError = document.querySelector(".errors")
+              if(!theError) return
+                this.props.clearErrors()
+            }, 7000)
+          } else {
+            element.classList.value = "animated inifite bounce wink far fa-smile-wink fa-2x"
+            setTimeout(() => {
+              element.classList.value = classL
+            }, 3000)
+          }
+        })
+      }
     }
   }
 
   render(){
     let divErrors
+    window.props = this.props
     if (this.props.errors) {
       divErrors = <div className="errors">{this.props.errors.error}</div>
     }
@@ -76,7 +99,7 @@ rotatePriceColor() {
           </div>
           <div className="toy-info">
             <p className="description">{toy.description}</p>
-            <h1 ref="price" id="price" className="price">{toy.price}$</h1>
+            <h1 ref="price" id="price" className="price">${toy.price}</h1>
           </div>
         </div>
       )
@@ -94,6 +117,8 @@ rotatePriceColor() {
 
 Landing.propTypes = {
   getToys: PropTypes.func.isRequired,
+  haveItem: PropTypes.func.isRequired,
+  clearErrors: PropTypes.func.isRequired,
   addToyToCart: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired
 }
@@ -104,4 +129,4 @@ const mapStateToProps = state => ({
   errors: state.errors
 })
 
-export default connect(mapStateToProps, { getToys, addToyToCart })(withRouter(Landing))
+export default connect(mapStateToProps, { getToys, clearErrors, addToyToCart, haveItem })(withRouter(Landing))

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { GET_ERRORS, SET_CURRENT_USER, ADD_TOY_TO_CART } from './types'
+import { GET_ERRORS, SET_CURRENT_USER, ADD_TOY_TO_CART, REMOVE_TOY_FROM_CART, CLEAR_ERRORS } from './types'
 import jwt_decode from 'jwt-decode'
 import setAuthToken from '../utils/set_auth_token'
 
@@ -47,6 +47,34 @@ export const addToyToCart = toyId => dispatch => (
       payload: {error: "You must be logged in to add a toy to your cart"}
     })
   )
+)
+
+export const haveItem = () => dispatch => (
+  dispatch({
+    type: GET_ERRORS,
+    payload: {error: "You aleardy have this item"}
+  })
+)
+
+export const removeToyFromCart = toyId => dispatch => (
+  axios.delete(`/api/toys/${toyId}/cart`)
+    .then(res =>
+      dispatch({
+        type: REMOVE_TOY_FROM_CART,
+        payload: res.data
+      })
+    ).catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        msg: "Couldn't remove toy"
+      })
+    )
+)
+
+export const clearErrors = () => dispatch => (
+  dispatch({
+    type: CLEAR_ERRORS
+  })
 )
 
 export const setCurrentUser = (decoded) => {

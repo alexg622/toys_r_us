@@ -53,6 +53,7 @@ router.patch('/:toyId', (req, res) => {
 // delete toy
 // change later to give user who made toy
 router.delete('/:toyId', (req, res) => {
+  console.log("HERE in toy delete");
   Toy.findById(req.params.ToyId).then(toy => {
     toy.remove().then(toy => res.json(toy))
   })
@@ -102,10 +103,12 @@ passport.authenticate('jwt', { session: false }),
   User.findById(req.user.id).then(user => {
     let index
     user.cart.map((toy, idx) => {
-      if (toy === req.params.toyId) index = idx
-      user.cart.splice(index, 1)
-      user.save()
-      res.json(user)
+        if (toy.id === req.params.toyId) {
+          index = idx
+          user.cart.splice(index, 1)
+          user.save()
+          res.json(user)
+        }
     })
   })
 })
