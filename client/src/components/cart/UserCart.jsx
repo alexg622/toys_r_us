@@ -28,17 +28,17 @@ class UserCart extends React.Component{
       let counter = 1
       newPrice = String(newPrice)
       let stri = ""
-      for(let i=0; i<newPrice.length; i++){
-        console.log("in loop");
+      for(let i=newPrice.length-1; i>-1; i--){
         if(counter % 3 === 0) {
-          stri = stri + newPrice[i] + ","
+          stri = "," + newPrice[i] + stri
         } else {
-          stri = stri + newPrice[i]
+          stri = newPrice[i] + stri
         }
         counter ++
         if(counter === 4) counter = 1
       }
     if(stri[stri.length-1] === ",") return stri.substr(0, stri.length-1)
+    if(stri[0] === ",") return stri.substr(1, stri.length-1)
     return stri
   }
 
@@ -47,13 +47,12 @@ class UserCart extends React.Component{
     let price = 0
     const toys = this.props.toys.map((toy, index) => {
       if(this.props.ids.includes(toy._id)) {
-        let quantity = 0
-        this.props.ids.map(id => {
-          if(id === toy._id) {
-            quantity += 1
-          }
+        let quantity = this.props.quantities[index]
+        this.props.cartToys.map(cartToy => {
+          if (this.props.allToyIds.includes(cartToy._id)) quantity = cartToy.quantity
         })
-        price += quantity * toy.price
+        console.log(quantity);
+        price += parseInt(quantity) * toy.price
         return (
           <div key={index} className="userCart-div">
             <div className="img-links">
@@ -96,12 +95,19 @@ UserCart.propTypes = {
 
 const mapStateToProps = state => {
   let ids = {}
+  let cartToys = {}
+  let quantities = {}
+  let allToyIds = {}
   if (state.auth.user.cart === undefined) {
     ids = {}
   } else {
     ids = Object.values(state.auth.user.cart).map(toy => toy._id)
+    allToyIds = Object.values(state.toy.toys).map(toy => toy._id)
+    cartToys = Object.values(state.auth.user.cart).map(toy => toy)
+    quantities = Object.values(state.auth.user.cart).map(toy => toy.quantities)
+
   }
-  return {toys: state.toy.toys, errors: state.errors, auth: state.auth, ids: ids}
+  return {allToyIds: allToyIds, toys: state.toy.toys, errors: state.errors, auth: state.auth, ids: ids, cartToys: cartToys, quantities: quantities}
 }
 
 export default connect(mapStateToProps, { getToys, removeToyFromCart })(withRouter(UserCart))

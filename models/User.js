@@ -22,6 +22,10 @@ const UserSchema = new Schema({
       toy: {
         type: Schema.Types.ObjectId,
         ref: "toy"
+      },
+      quantity: {
+        type: String,
+        default: "1"
       }
     }
   ],
@@ -32,7 +36,7 @@ const UserSchema = new Schema({
         ref: 'toy'
       }
     }
-  ], 
+  ],
   date: {
     type: Date,
     default: Date.now
