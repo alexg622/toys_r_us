@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route} from 'react-router-dom'
 import Landing from './components/landing'
+import UserCart from './components/cart/UserCart'
 import Register from './components/auth/register'
 import Login from './components/auth/login'
 import { Provider } from 'react-redux'
@@ -32,6 +33,7 @@ class App extends Component {
             <Navbar />
             <Route exact path="/" component={ Landing }/>
             <Route exact path='/register' component={Register}/>
+            <Route exact path='/cart' component={UserCart}/>
             <Route exact path='/login' component={Login}/>
             <Route exact path='/toys/new' component={CreateToyForm} />
           </div>

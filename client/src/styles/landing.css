@@ -1,7 +1,12 @@
-img {
+
+
+#cart-img{
   object-fit: cover;
-  width: 400;
-  height: 500;
+  height: 300px;
+}
+#landing-img{
+  object-fit: cover;
+
 }
 
 .list-of-toys:first-child {
@@ -40,6 +45,10 @@ img {
   transition: color 2s;
 }
 
+.quantity {
+  padding-top: 5px;
+}
+
 .landing-div {
   display: flex;
   /* padding-top: 10px; */
@@ -48,21 +57,45 @@ img {
   width: 80%;
   border-bottom: 2px solid black;
   background: white;
+  height: 350px;
 }
 
+.errors {
+  color: red;
+  font-family: "Comic Sans MS";
+  font-size: 30px;
+  background: lightgray;
+  padding: 0;
+  margin: 0;
+}
 .add-cart {
+  padding-top: 17px;
+  padding-bottom: 19px;
+  -webkit-transition: color .5s;
+  -o-transition: color .5s;
+  transition: color .5s;
+  width: 50px;
+  color: white;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  position: relative;
+  padding-right: 21px;
+  padding-left: 8px;
+}
+
+.cartItems{
+  position: absolute;
+  color: orange;
+  font-size: 21px;
+  top: 23px;
+  right: 29px;
+  font-family: sans-serif;
+}
+
+.wink {
   padding-top: 10px;
   padding-bottom: 10px;
-  transition: color .5s;
-  /* color: violet;  */
-  width: 50px;
   padding-left: 5px;
-  color: white;
-  text-shadow:
-  -1px -1px 0 #000,
-  1px -1px 0 #000,
-  -1px 1px 0 #000,
-  1px 1px 0 #000;
+  width: 50px;
 }
 
 .add-cart:hover {
@@ -81,6 +114,7 @@ img {
 .img-links {
   display: flex;
   flex-direction: column;
+  height: 350px;
 }
 
 .list-of-toys {

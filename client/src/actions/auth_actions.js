@@ -34,7 +34,7 @@ export const loginUser = userData => dispatch => {
     )
 }
 
-export const addToyToCart = toyId => dispatch => {
+export const addToyToCart = toyId => dispatch => (
   axios.post(`/api/toys/${toyId}/cart`)
   .then(res =>
     dispatch({
@@ -47,7 +47,7 @@ export const addToyToCart = toyId => dispatch => {
       payload: {error: "You must be logged in to add a toy to your cart"}
     })
   )
-}
+)
 
 export const setCurrentUser = (decoded) => {
   return {

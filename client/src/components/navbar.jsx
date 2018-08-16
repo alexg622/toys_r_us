@@ -1,16 +1,36 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { logoutUser } from '../actions/auth_actions'
+import {withRouter} from 'react-router-dom'
+import { logoutUser, loginUser } from '../actions/auth_actions'
 import { connect } from 'react-redux'
-import axios from 'axios' 
+
 
 
 class Navbar extends React.Component {
+  constructor(props){
+    super(props)
+    this.demoLogin = this.demoLogin.bind(this)
+    this.logout = this.logout.bind(this)
+  }
+  demoLogin(e){
+    e.preventDefault()
+    const demoUser = {
+      email: "alex@mail.com",
+      password: "password"
+    }
+    this.props.loginUser(demoUser)
+  }
 
+  logout(e){
+    e.preventDefault()
+    this.props.logoutUser()
+    this.props.history.push('/')
+  }
   noAuthLinks(){
     return (
       <div className="no-auth-links">
+        <button className="demo-button" onClick={this.demoLogin}>DemoLogin</button>
         <Link className="login-button" to='/login'>Login</Link>
         <Link className="register-button" to='/register'>Register</Link>
       </div>
@@ -21,16 +41,18 @@ class Navbar extends React.Component {
     return (
       <div className="auth-links">
         <div className='view-cart'>
-          <i className="add-cart fas fa-shopping-cart fa-2x"></i>
+
+          <Link to="/cart">
+            <i className="add-cart fas fa-shopping-cart fa-3x"><h1 className="cartItems">{this.props.cartItems}</h1></i>
+          </Link>
         </div>
-        <button className="logout-button" onClick={this.props.logoutUser}>Logout</button>
+        <button className="logout-button" onClick={this.logout}>Logout</button>
       </div>
     )
   }
   render() {
     window.props = this.props
     const { isAuthenticated } = this.props.auth
-    const logout = <button className="logout-button" onClick={this.props.logoutUser}>Logout</button>
     return (
       <div className="navbar">
         <Link to="/" className="logo">
@@ -54,10 +76,17 @@ class Navbar extends React.Component {
 
 Navbar.propTypes = {
   logoutUser: PropTypes.func.isRequired,
+  loginUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired
 }
-const mapStateToProps = state => ({
-  auth: state.auth
-})
+const mapStateToProps = state => {
+  let items = 0
+  if (state.auth.user.cart === undefined) {
+    items = 0
+  } else {
+    items = Object.values(state.auth.user.cart).length
+  }
+  return {auth: state.auth, cartItems: items}
+}
 
-export default connect(mapStateToProps, { logoutUser })(Navbar)
+export default connect(mapStateToProps, { logoutUser, loginUser })(withRouter(Navbar))

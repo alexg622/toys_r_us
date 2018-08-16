@@ -4,20 +4,16 @@ import { withRouter } from 'react-router-dom'
 import { getToys } from "../actions/toy_actions"
 import { addToyToCart } from "../actions/auth_actions"
 import PropTypes from 'prop-types'
-import axios from 'axios'
+
 
 
 class Landing extends React.Component{
   constructor(props){
     super(props)
-    this.state = {
-      color: "blue"
-    }
     this.addToCart = this.addToCart.bind(this)
   }
 
   componentDidMount(){
-    console.log("here");
     this.props.getToys()
     setTimeout(this.rotatePriceColor, 1000)
   }
@@ -37,18 +33,42 @@ rotatePriceColor() {
 
   addToCart(){
     return e => {
-      console.log("here");
-      this.props.addToyToCart(e.target.id)
+      const element = e.target
+      const classL = element.classList.value
+      const color = element.style.color
+      this.props.addToyToCart(e.target.id).then(res => {
+        if (res.type === "GET_ERRORS") {
+          element.classList.value = "animated inifite bounce wink far fa-frown fa-2x"
+          element.style.color = "red"
+          setTimeout(() => {
+            element.classList.value = classL
+            element.style.color = color
+          }, 3000)
+          setTimeout(() => {
+            let theError = document.querySelector(".errors")
+            if(!theError) return
+            theError.remove()
+          }, 7000)
+        } else {
+          element.classList.value = "animated inifite bounce wink far fa-smile-wink fa-2x"
+          setTimeout(() => {
+            element.classList.value = classL
+          }, 3000)
+        }
+      })
     }
   }
 
   render(){
-    window.props = this.props
+    let divErrors
+    if (this.props.errors) {
+      divErrors = <div className="errors">{this.props.errors.error}</div>
+    }
     const toys = this.props.toys.map((toy, index) => {
       return (
         <div key={index} className="landing-div">
           <div className="img-links">
-            <img src={toy.avatar} alt="" heigth="500" width="400"/>
+            <img id="landing-img" src={toy.avatar} alt="" height="300px" width="400px"/>
             <div className="buy-div">
               <i onClick={this.addToCart()} id={toy._id} className="add-cart fas fa-cart-plus fa-2x"></i>
               <h1 className="buy-me">Buy Me!</h1>
@@ -63,6 +83,7 @@ rotatePriceColor() {
     })
     return(
       <div>
+        {divErrors}
         <div ref="toys" className="list-of-toys">
           {toys}
         </div>
@@ -79,7 +100,7 @@ Landing.propTypes = {
 
 const mapStateToProps = state => ({
   toys: state.toy.toys,
-  auth: state.auth, 
+  auth: state.auth,
   errors: state.errors
 })
 
