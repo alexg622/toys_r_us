@@ -71,7 +71,6 @@ class UserCart extends React.Component{
   }
 
   render(){
-    console.log(this.items());
     window.props = this.props
     let toys = []
     if(this.props.toys.length > 0) {
@@ -82,9 +81,6 @@ class UserCart extends React.Component{
     let price = 0
     const outputToys = toys.map((toy, index) => {
       let quantity = parseInt(toy[1])
-      // console.log(parseInt(quantity));
-      // console.log(parseInt(toy[0].price));
-      // console.log(parseInt(quantity) * parseInt(toy[0].price));
       price += quantity * parseInt(toy[0].price)
       return (
         <div key={index} className="userCart-div">

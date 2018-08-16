@@ -12,6 +12,7 @@ class Navbar extends React.Component {
     super(props)
     this.demoLogin = this.demoLogin.bind(this)
     this.logout = this.logout.bind(this)
+    this.items = this.items.bind(this)
   }
   demoLogin(e){
     e.preventDefault()
@@ -37,13 +38,19 @@ class Navbar extends React.Component {
     )
   }
 
+  items(){
+    let result = 0
+    this.props.auth.user.cart.map(toy => result += parseInt(toy.quantity))
+    return result
+  }
+
   authLinks(user){
     return (
       <div className="auth-links">
         <div className='view-cart'>
 
           <Link to="/cart">
-            <i className="add-cart fas fa-shopping-cart fa-3x"><h1 className="cartItems">{this.props.cartItems}</h1></i>
+            <i className="add-cart fas fa-shopping-cart fa-3x"><h1 className="cartItems">{this.items()}</h1></i>
           </Link>
         </div>
         <button className="logout-button" onClick={this.logout}>Logout</button>
