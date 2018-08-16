@@ -13,9 +13,36 @@
   color: blue;
 }
 
+#quantity-form {
+  margin-top: 8px;
+  display: flex;
+  background: lightgray;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  border: 1px solid black;
+  height: 64px;
+}
+.quantity-submit {
+  margin-left: 13px;
+  height: 31px;
+  width: 122px;
+  background: orange;
+  text-align: center;
+  border: 1px solid black;
+  transition: background 1s; 
+
+}
+
+.quantity-submit:hover {
+  cursor: pointer;
+  background: lightgreen;
+}
+
+
 .delete-from-cart {
   width: 50px;
-  transition: color .25s; 
+  transition: color .25s;
 }
 
 .list-of-toys:first-child {

@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { getToys } from "../actions/toy_actions"
-import { addToyToCart, clearErrors, haveItem } from "../actions/auth_actions"
+import { addToyToCart, clearErrors, haveItem, getCurrentUser } from "../actions/auth_actions"
 import PropTypes from 'prop-types'
 
 
@@ -14,6 +14,9 @@ class Landing extends React.Component{
   }
 
   componentDidMount(){
+    if(this.props.auth.user.cart !== undefined){
+      this.props.getCurrentUser()
+    }
     this.props.getToys()
     this.props.clearErrors()
     setTimeout(this.rotatePriceColor, 1000)
@@ -117,6 +120,7 @@ rotatePriceColor() {
 
 Landing.propTypes = {
   getToys: PropTypes.func.isRequired,
+  getCurrentUser: PropTypes.func.isRequired,
   haveItem: PropTypes.func.isRequired,
   clearErrors: PropTypes.func.isRequired,
   addToyToCart: PropTypes.func.isRequired,
@@ -129,4 +133,4 @@ const mapStateToProps = state => ({
   errors: state.errors
 })
 
-export default connect(mapStateToProps, { getToys, clearErrors, addToyToCart, haveItem })(withRouter(Landing))
+export default connect(mapStateToProps, { getCurrentUser, getToys, clearErrors, addToyToCart, haveItem })(withRouter(Landing))

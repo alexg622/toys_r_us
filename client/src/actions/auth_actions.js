@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { GET_ERRORS, SET_CURRENT_USER, ADD_TOY_TO_CART, REMOVE_TOY_FROM_CART, CLEAR_ERRORS } from './types'
+import { GET_CURRENT_USER, GET_ERRORS, SET_CURRENT_USER, ADD_TOY_TO_CART, REMOVE_TOY_FROM_CART, CLEAR_ERRORS } from './types'
 import jwt_decode from 'jwt-decode'
 import setAuthToken from '../utils/set_auth_token'
 
@@ -15,7 +15,7 @@ export const registerUser = (userData, history) => dispatch => {
     )
 }
 
-export const loginUser = userData => dispatch => {
+export const loginUser = userData => dispatch => (
   axios
     .post('/api/users/login', userData)
     .then(res => {
@@ -32,7 +32,17 @@ export const loginUser = userData => dispatch => {
         payload: err.response.data
       })
     )
-}
+)
+
+export const getCurrentUser = () => dispatch => (
+  axios.get(`/api/users/current`)
+    .then(res =>
+      dispatch({
+        type: GET_CURRENT_USER,
+        payload: res.data
+      })
+    )
+)
 
 export const addToyToCart = toyId => dispatch => (
   axios.post(`/api/toys/${toyId}/cart`)

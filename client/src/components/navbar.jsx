@@ -20,7 +20,7 @@ class Navbar extends React.Component {
       email: "alex@mail.com",
       password: "password"
     }
-    this.props.loginUser(demoUser)
+    this.props.loginUser(demoUser).then(this.props.history.push('/'))
   }
 
   logout(e){

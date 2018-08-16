@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { getToys, changeQuantity } from "../../actions/toy_actions"
-import { removeToyFromCart } from "../../actions/auth_actions"
+import { removeToyFromCart, getCurrentUser } from "../../actions/auth_actions"
 import PropTypes from 'prop-types'
 
 
@@ -15,6 +15,9 @@ class UserCart extends React.Component{
     this.handleSubmit = this.handleSubmit.bind(this)
   }
   componentDidMount(){
+    if(this.props.auth.user.cart !== undefined){
+      this.props.getCurrentUser()
+    }
     this.props.getToys()
     setTimeout(this.rotatePriceColor, 1000)
   }
@@ -107,7 +110,7 @@ class UserCart extends React.Component{
                 <option defaultValue="selected">{quantity}</option>
                 {this.optionSelect()}
               </select>
-              <input type="submit" value="quantity"/>
+              <input className="quantity-submit" type="submit" value="Submit"/>
             </form>
           </div>
         </div>
@@ -135,6 +138,7 @@ class UserCart extends React.Component{
 
 UserCart.propTypes = {
   getToys: PropTypes.func.isRequired,
+  getCurrentUser: PropTypes.func.isRequired,
   changeQuantity: PropTypes.func.isRequired,
   removeToyFromCart: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired
@@ -157,4 +161,4 @@ const mapStateToProps = state => {
   return {allToyIds: allToyIds, toys: state.toy.toys, errors: state.errors, auth: state.auth, ids: ids, cartToys: cartToys, quantities: quantities}
 }
 
-export default connect(mapStateToProps, { getToys, changeQuantity, removeToyFromCart })(withRouter(UserCart))
+export default connect(mapStateToProps, { getCurrentUser, getToys, changeQuantity, removeToyFromCart })(withRouter(UserCart))
