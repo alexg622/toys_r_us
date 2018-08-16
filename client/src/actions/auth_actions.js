@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { GET_ERRORS, SET_CURRENT_USER } from './types'
+import { GET_ERRORS, SET_CURRENT_USER, ADD_TOY_TO_CART } from './types'
 import jwt_decode from 'jwt-decode'
 import setAuthToken from '../utils/set_auth_token'
 
@@ -32,6 +32,21 @@ export const loginUser = userData => dispatch => {
         payload: err.response.data
       })
     )
+}
+
+export const addToyToCart = toyId => dispatch => {
+  axios.post(`/api/toys/${toyId}/cart`)
+  .then(res =>
+    dispatch({
+      type: ADD_TOY_TO_CART,
+      payload: res.data
+    })
+  ).catch(err =>
+    dispatch({
+      type: GET_ERRORS,
+      payload: {error: "You must be logged in to add a toy to your cart"}
+    })
+  )
 }
 
 export const setCurrentUser = (decoded) => {
