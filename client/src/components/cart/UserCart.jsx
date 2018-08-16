@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { getToys } from "../../actions/toy_actions"
+import { getToys, changeQuantity } from "../../actions/toy_actions"
 import { removeToyFromCart } from "../../actions/auth_actions"
 import PropTypes from 'prop-types'
 
@@ -12,6 +12,7 @@ class UserCart extends React.Component{
     super(props)
     this.getPrice = this.getPrice.bind(this)
     this.deleteToy = this.deleteToy.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
   componentDidMount(){
     this.props.getToys()
@@ -21,6 +22,15 @@ class UserCart extends React.Component{
   deleteToy(e){
     e.preventDefault()
     this.props.removeToyFromCart(String(e.target.id))
+  }
+
+  handleSubmit(e){
+    e.preventDefault()
+    let select = e.target.querySelector('select')
+    let val = select.value
+    let id = select.id
+    const quantity = {quantity: val}
+    this.props.changeQuantity(id, quantity)
   }
 
   getPrice(newPrice){
@@ -92,8 +102,8 @@ class UserCart extends React.Component{
             <p className="description">{toy[0].description}</p>
             <h1 ref="price" id="price" className="price">${toy[0].price}</h1>
             <h1 ref="price" id="price" className="quantity">Quantity: {quantity}</h1>
-            <form>
-              <select>
+            <form id="quantity-form" onSubmit={this.handleSubmit}>
+              <select id={toy[0]._id} className="select-value" from="quantity-form">
                 <option defaultValue="selected">{quantity}</option>
                 {this.optionSelect()}
               </select>
@@ -125,6 +135,7 @@ class UserCart extends React.Component{
 
 UserCart.propTypes = {
   getToys: PropTypes.func.isRequired,
+  changeQuantity: PropTypes.func.isRequired,
   removeToyFromCart: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired
 }
@@ -146,4 +157,4 @@ const mapStateToProps = state => {
   return {allToyIds: allToyIds, toys: state.toy.toys, errors: state.errors, auth: state.auth, ids: ids, cartToys: cartToys, quantities: quantities}
 }
 
-export default connect(mapStateToProps, { getToys, removeToyFromCart })(withRouter(UserCart))
+export default connect(mapStateToProps, { getToys, changeQuantity, removeToyFromCart })(withRouter(UserCart))

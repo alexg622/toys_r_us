@@ -96,12 +96,13 @@ passport.authenticate('jwt', { session: false }),
   })
 })
 
+// change quantity in cart
 router.patch('/:toyId/cart',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
     User.findById(req.user.id).then(user => {
       user.cart.map(toy => {
-        if(toy.id === req.params.toyId) toy.quantity = req.body.quantity 
+        if(toy.id === req.params.toyId) toy.quantity = req.body.quantity
       })
       user.save()
       res.json(user)

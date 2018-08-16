@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {DELETE_TOY, GET_TOYS, GET_TOY, GET_ERRORS} from './types'
+import {DELETE_TOY, GET_TOYS, GET_TOY, GET_ERRORS, QUANTITY} from './types'
 
 export const getToys = () => dispatch => {
   axios
@@ -46,6 +46,16 @@ export const addToy = (toyData, history) => dispatch => {
       })
     )
 }
+
+export const changeQuantity = (toyId, quantity) => dispatch => (
+  axios.patch(`/api/toys/${toyId}/cart`, quantity)
+    .then(res =>
+      dispatch({
+        type: QUANTITY,
+        payload: res.data
+      })
+    )
+)
 
 export const deleteToy = id => dispatch => {
   axios
