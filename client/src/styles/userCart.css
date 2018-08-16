@@ -6,7 +6,16 @@
 }
 #landing-img{
   object-fit: cover;
+}
 
+.delete-from-cart:hover {
+  cursor: pointer;
+  color: blue;
+}
+
+.delete-from-cart {
+  width: 50px;
+  transition: color .25s; 
 }
 
 .list-of-toys:first-child {

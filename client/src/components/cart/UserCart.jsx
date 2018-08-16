@@ -20,7 +20,6 @@ class UserCart extends React.Component{
 
   deleteToy(e){
     e.preventDefault()
-    console.log(typeof e.target.id);
     this.props.removeToyFromCart(String(e.target.id))
   }
 
@@ -42,42 +41,83 @@ class UserCart extends React.Component{
     return stri
   }
 
-  render(){
-    window.props = this.props
-    let price = 0
-    const toys = this.props.toys.map((toy, index) => {
+  optionSelect(){
+    let i = 0
+    let options = []
+    while(i < 11) {
+      options.push(<option key={i}>{i}</option>)
+      i ++
+    }
+    return options
+  }
+
+  toysInCart(){
+    let toys = {}
+    this.props.toys.map(toy => {
       if(this.props.ids.includes(toy._id)) {
-        let quantity = this.props.quantities[index]
-        this.props.cartToys.map(cartToy => {
-          if (this.props.allToyIds.includes(cartToy._id)) quantity = cartToy.quantity
-        })
-        console.log(quantity);
-        price += parseInt(quantity) * toy.price
-        return (
-          <div key={index} className="userCart-div">
-            <div className="img-links">
-              <img id="cart-img" src={toy.avatar} alt="" heigth="300px" width="400px"/>
-              <button id={toy._id} onClick={this.deleteToy}>Delete</button>
-            </div>
-            <div className="toy-info">
-              <p className="description">{toy.description}</p>
-              <h1 ref="price" id="price" className="price">${toy.price}</h1>
-              <h1 ref="price" id="price" className="quantity">Quantity: {quantity}</h1>
-            </div>
-          </div>
-        )
+        toys[toy._id] = [toy]
       }
     })
-    if(price > 0) price = this.getPrice(price)
+    this.props.cartToys.map(toy => {
+      toys[toy._id].push(toy.quantity)
+    })
+    return toys
+  }
+
+  items(){
+    let result = 0
+    this.props.quantities.map(quantity => result += parseInt(quantity))
+    return result
+  }
+
+  render(){
+    console.log(this.items());
+    window.props = this.props
+    let toys = []
+    if(this.props.toys.length > 0) {
+      window.toys = this.toysInCart()
+      toys = Object.values(this.toysInCart())
+    }
+
+    let price = 0
+    const outputToys = toys.map((toy, index) => {
+      let quantity = parseInt(toy[1])
+      // console.log(parseInt(quantity));
+      // console.log(parseInt(toy[0].price));
+      // console.log(parseInt(quantity) * parseInt(toy[0].price));
+      price += quantity * parseInt(toy[0].price)
+      return (
+        <div key={index} className="userCart-div">
+          <div className="img-links">
+            <img id="cart-img" src={toy[0].avatar} alt="" heigth="300px" width="400px"/>
+            <button className="delete-from-cart" id={toy[0]._id} onClick={this.deleteToy}>Delete</button>
+          </div>
+          <div className="toy-info">
+            <p className="description">{toy[0].description}</p>
+            <h1 ref="price" id="price" className="price">${toy[0].price}</h1>
+            <h1 ref="price" id="price" className="quantity">Quantity: {quantity}</h1>
+            <form>
+              <select>
+                <option defaultValue="selected">{quantity}</option>
+                {this.optionSelect()}
+              </select>
+              <input type="submit" value="quantity"/>
+            </form>
+          </div>
+        </div>
+      )
+    })
+    if(price > 0) price = this.getPrice(String(price))
     if(this.props.ids.length === 0) price = 0
+
     return(
       <div className='userCart-container'>
-        <div ref="toys" className="list-of-toys-cart">
-          {toys}
+        <div className="list-of-toys-cart">
+          {outputToys}
         </div>
         <div className='checkout'>
           <div className="checkout-items">
-            <div>Items: {this.props.ids.length}</div>
+            <div>Items: {this.items()}</div>
             <div>Buy Items: ${price}</div>
             <button className="purchase">Purchase</button>
           </div>
@@ -104,7 +144,7 @@ const mapStateToProps = state => {
     ids = Object.values(state.auth.user.cart).map(toy => toy._id)
     allToyIds = Object.values(state.toy.toys).map(toy => toy._id)
     cartToys = Object.values(state.auth.user.cart).map(toy => toy)
-    quantities = Object.values(state.auth.user.cart).map(toy => toy.quantities)
+    quantities = Object.values(state.auth.user.cart).map(toy => toy.quantity)
 
   }
   return {allToyIds: allToyIds, toys: state.toy.toys, errors: state.errors, auth: state.auth, ids: ids, cartToys: cartToys, quantities: quantities}
