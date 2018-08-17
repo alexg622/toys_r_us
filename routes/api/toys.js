@@ -127,16 +127,30 @@ passport.authenticate('jwt', { session: false }),
 })
 
 // purchase toy
-router.post('/:toyId/purchase',
-passport.authenticate('jwt', { session: false }),
-(req, res) => {
-  User.findById(req.user.id).then(user => {
-    Toy.findById(req.params.toyId).then(toy => {
-      user.toys.unshift(toy)
+router.post('/purchase',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    User.findById(req.user.id).then(user => {
+        if(user.toys.length === 0) {
+          user.toys = user.cart
+          user.cart = []
+          user.save()
+          return res.json(user)
+        }
+        user.cart.map(toy => {
+          user.toys.map(userToy => {
+            if(userToy.id === toy.id) {
+              userToy.quantity = String(parseInt(toy.quantity) + parseInt(userToy.quantity))
+            } else {
+              user.toys.unshift(toy)
+            }
+          })
+        })
+      user.cart = []
       user.save()
       res.json(user)
     })
-  })
-})
+  }
+)
 
 module.exports = router

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { GET_CURRENT_USER, GET_ERRORS, SET_CURRENT_USER, ADD_TOY_TO_CART, REMOVE_TOY_FROM_CART, CLEAR_ERRORS } from './types'
+import { BUY_TOYS, GET_CURRENT_USER, GET_ERRORS, SET_CURRENT_USER, ADD_TOY_TO_CART, REMOVE_TOY_FROM_CART, CLEAR_ERRORS } from './types'
 import jwt_decode from 'jwt-decode'
 import setAuthToken from '../utils/set_auth_token'
 
@@ -30,6 +30,16 @@ export const loginUser = userData => dispatch => (
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
+      })
+    )
+)
+
+export const buyToys = () => dispatch => (
+  axios.post(`/api/toys/purchase`)
+    .then(res =>
+      dispatch({
+        type: BUY_TOYS,
+        payload: res.data
       })
     )
 )

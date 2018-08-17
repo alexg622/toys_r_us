@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { getToys, changeQuantity } from "../../actions/toy_actions"
-import { removeToyFromCart, getCurrentUser } from "../../actions/auth_actions"
+import { removeToyFromCart, getCurrentUser, buyToys } from "../../actions/auth_actions"
 import PropTypes from 'prop-types'
 
 
@@ -128,7 +128,7 @@ class UserCart extends React.Component{
           <div className="checkout-items">
             <div>Items: {this.items()}</div>
             <div>Buy Items: ${price}</div>
-            <button className="purchase">Purchase</button>
+            <button onClick={this.props.buyToys} className="purchase">Purchase</button>
           </div>
         </div>
       </div>
@@ -139,6 +139,7 @@ class UserCart extends React.Component{
 UserCart.propTypes = {
   getToys: PropTypes.func.isRequired,
   getCurrentUser: PropTypes.func.isRequired,
+  buyToys: PropTypes.func.isRequired,
   changeQuantity: PropTypes.func.isRequired,
   removeToyFromCart: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired
@@ -161,4 +162,4 @@ const mapStateToProps = state => {
   return {allToyIds: allToyIds, toys: state.toy.toys, errors: state.errors, auth: state.auth, ids: ids, cartToys: cartToys, quantities: quantities}
 }
 
-export default connect(mapStateToProps, { getCurrentUser, getToys, changeQuantity, removeToyFromCart })(withRouter(UserCart))
+export default connect(mapStateToProps, { buyToys, getCurrentUser, getToys, changeQuantity, removeToyFromCart })(withRouter(UserCart))

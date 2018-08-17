@@ -34,6 +34,10 @@ const UserSchema = new Schema({
       toy: {
         type: Schema.Types.ObjectId,
         ref: 'toy'
+      },
+      quantity: {
+        type: String,
+        default: "1"
       }
     }
   ],

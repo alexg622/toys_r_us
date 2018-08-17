@@ -3,10 +3,13 @@
 #cart-img{
   object-fit: cover;
   height: 300px;
+  border-right: 3px solid black;
+  border-bottom: 3px solid black;
 }
 #landing-img{
   object-fit: cover;
-
+  border-right: 3px solid black;
+  border-bottom: 3px solid black; 
 }
 
 .list-of-toys:first-child {
@@ -24,7 +27,7 @@
 
 .buy-me {
   transition: color 2s;
-  width: 77px; 
+  width: 77px;
 }
 
 .buy-div{
