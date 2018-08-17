@@ -58,7 +58,7 @@ class UserToys extends React.Component{
   emptyMessage(){
     if(this.props.ids.length === 0){
       return (
-        <div className="empty-message">You Have No Toys</div>
+        <div className="toys-empty-message">You Have No Toys</div>
       )
     }
   }
@@ -94,8 +94,7 @@ class UserToys extends React.Component{
     return(
       <div className='userToy-container'>
         <div className="list-of-userToys-userToy">
-          <h1 className='new-your-toys'>Your Toys!</h1>
-          {this.emptyMessage()}
+          {this.emptyMessage() ? this.emptyMessage() : <h1 className='new-your-toys'>Your Toys!</h1>}
           {outputToys}
         </div>
       </div>
