@@ -5,7 +5,7 @@ const passport = require('passport')
 const jwt = require('jsonwebtoken')
 const users = require('./routes/api/users')
 const toys = require('./routes/api/toys')
-const db = require('./.git/keys').mongoURI
+const db = require('./config/keys').mongoURI
 const app = express()
 
 app.use(bodyParser.urlencoded({extended: false}))
@@ -14,7 +14,7 @@ app.use(bodyParser.json())
 mongoose.connect(db).then(() => console.log("mongoDB is connected")).catch(err => console.log(err))
 
 app.use(passport.initialize())
-require('./.git/passport.js')(passport);
+require('./config/passport.js')(passport);
 
 app.get('/test', (req, res) => res.send("working"))
 

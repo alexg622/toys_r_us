@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const passport = require('passport')
 const gravatar = require('gravatar')
-const keys = require('../../.git/keys')
+const keys = require('../../config/keys')
 
 // Load input validation
 const validateRegisterInput = require("../../validation/register")
