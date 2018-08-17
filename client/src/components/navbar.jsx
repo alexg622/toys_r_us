@@ -47,13 +47,11 @@ class Navbar extends React.Component {
   authLinks(user){
     return (
       <div className="auth-links">
-        <div className='view-cart'>
-
-          <Link to="/cart">
-            <i className="add-cart fas fa-shopping-cart fa-3x"><h1 className="cartItems">{this.items()}</h1></i>
-          </Link>
-        </div>
-        <button className="logout-button" onClick={this.logout}>Logout</button>
+        <Link className="cartItems-button" to="/cart">
+          <i className="fas fa-shopping-cart fa-2x"><h1 className="new-cartItems">{this.items()}</h1></i>
+        </Link>
+        <Link className="yourToys-button" to='/userToys'>Your Toys</Link>
+        <button className="new-logout-button" onClick={this.logout}>Logout</button>
       </div>
     )
   }
@@ -75,7 +73,9 @@ class Navbar extends React.Component {
         </Link>
         <div className="auth-buttons">
           {isAuthenticated ? this.authLinks(this.props.auth.user) : this.noAuthLinks()}
+
         </div>
+
       </div>
     )
   }

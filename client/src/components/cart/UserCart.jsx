@@ -83,6 +83,14 @@ class UserCart extends React.Component{
     return result
   }
 
+  emptyMessage(){
+    if(this.props.ids.length === 0){
+      return (
+        <div className="empty-message">Cart is Empty</div>
+      )
+    }
+  }
+
   render(){
     window.props = this.props
     let toys = []
@@ -96,7 +104,7 @@ class UserCart extends React.Component{
       let quantity = parseInt(toy[1])
       price += quantity * parseInt(toy[0].price)
       return (
-        <div key={index} className="userCart-div">
+        <div key={index} id="newUserCart-div" className="userCart-div">
           <div className="img-links">
             <img id="cart-img" src={toy[0].avatar} alt="" heigth="300px" width="400px"/>
             <button className="delete-from-cart" id={toy[0]._id} onClick={this.deleteToy}>Delete</button>
@@ -118,10 +126,10 @@ class UserCart extends React.Component{
     })
     if(price > 0) price = this.getPrice(String(price))
     if(this.props.ids.length === 0) price = 0
-
     return(
       <div className='userCart-container'>
         <div className="list-of-toys-cart">
+          {this.emptyMessage()}
           {outputToys}
         </div>
         <div className='checkout'>

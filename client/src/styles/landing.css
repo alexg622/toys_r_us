@@ -8,8 +8,8 @@
 }
 #landing-img{
   object-fit: cover;
-  border-right: 3px solid black;
-  border-bottom: 3px solid black; 
+  /* border-right: 3px solid black; */
+  border-bottom: 3px solid black;
 }
 
 .list-of-toys:first-child {
@@ -34,6 +34,7 @@
   display: flex;
   align-items: center;
   width: 125px;
+  padding-left: 7px;
 }
 
 .name {
@@ -55,13 +56,13 @@
 
 .landing-div {
   display: flex;
-  /* padding-top: 10px; */
   justify-content: space-between;
-  padding-bottom: 10px;
   width: 80%;
   border-bottom: 2px solid black;
   background: white;
   height: 350px;
+  border-right: 2px solid black;
+  border-left: 2px solid black;
 }
 
 .errors {
@@ -72,22 +73,9 @@
   padding: 0;
   margin: 0;
 }
-.add-cart {
-  padding-top: 17px;
-  padding-bottom: 19px;
-  -webkit-transition: color .5s;
-  -o-transition: color .5s;
-  transition: color .5s;
-  width: 50px;
-  color: white;
-  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-  position: relative;
-  padding-right: 21px;
-  padding-left: 8px;
-}
 
 .cartItems{
-  position: absolute;
+  /* position: absolute; */
   color: orange;
   font-size: 21px;
   top: 23px;
@@ -102,10 +90,6 @@
   width: 50px;
 }
 
-.add-cart:hover {
-  color: lightgreen;
-  cursor: pointer;
-}
 
 .buy-div:hover{
   cursor: pointer;
@@ -119,6 +103,7 @@
   display: flex;
   flex-direction: column;
   height: 350px;
+  border-right: 2px solid black;
 }
 
 .list-of-toys {

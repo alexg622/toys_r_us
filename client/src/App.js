@@ -8,6 +8,7 @@ import { Provider } from 'react-redux'
 import jwt_decode from 'jwt-decode'
 import setAuthToken from './utils/set_auth_token'
 import { setCurrentUser } from './actions/auth_actions'
+import UserToys from './components/userToys/userToys'
 import Navbar from './components/navbar'
 import store from './store'
 import CreateToyForm from './components/toy/create_toy_form'
@@ -17,6 +18,7 @@ import './styles/register_form.css';
 import './styles/create_toy_form.css';
 import './styles/landing.css';
 import './styles/userCart.css';
+import './styles/userToys.css';
 
 if(localStorage.jwtToken) {
   setAuthToken(localStorage.jwtToken)
@@ -33,6 +35,7 @@ class App extends Component {
           <div className="App">
             <Navbar />
             <Route exact path="/" component={ Landing }/>
+            <Route exact path="/userToys" component={ UserToys }/>
             <Route exact path='/register' component={Register}/>
             <Route exact path='/cart' component={UserCart}/>
             <Route exact path='/login' component={Login}/>

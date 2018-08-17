@@ -17,6 +17,111 @@ ul {
   list-style: none;
 }
 
+.new-cartItems {
+  position: absolute;
+  color: orange;
+  font-size: 25px;
+  top: 18px;
+  right: 276px;
+}
+
+.auth-links {
+  display: flex;
+  justify-content: space-between;
+  height: 75px;
+  font-family: "Comic Sans MS"
+}
+
+.new-logout-button {
+    font-family: "Comic Sans MS";
+    font-size: 25px;
+    color: black;
+    transition: color 1.5s;
+    padding-top: 15px;
+    padding-right: 15px;
+    padding-bottom: 24px;
+    padding-left: 7px;
+    border-left: 1px solid black;
+}
+
+.new-logout-button:hover {
+  cursor: pointer;
+  color: orange;
+}
+
+.yourToys-button {
+  font-family: "Comic Sans MS";
+  font-size: 25px;
+  color: black;
+  margin-left: 15px;
+  transition: color 1.5s;
+  padding-top: 15px;
+  padding-right: 10px;
+  transition: color 1.5;
+}
+
+.yourToys-button:hover {
+  cursor: pointer;
+  color: orange;
+}
+
+.cartItems-button {
+  font-family: "Comic Sans MS";
+  font-size: 25px;
+  color: black;
+  transition: color 1.5s;
+  border-right: 1px solid black;
+  padding-top: 12px;
+  padding-right: 15px;
+  padding-left: 15px;
+  color: white;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+.cartItems-button:hover{
+  color: orange;
+  cursor: pointer;
+}
+
+.dropdown {
+  font-size: 30px;
+  background: lightgray;
+  border: 3px solid black;
+}
+
+.add-cart {
+  padding-top: 17px;
+  padding-bottom: 19px;
+  transition: color .5s;
+  width: 50px;
+  color: white;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  position: relative;
+}
+
+.add-cart:hover{
+  color: orange;
+  cursor: pointer;
+}
+
+.your-toys {
+  height: 100%;
+  width: 100px;
+
+}
+
+.add-cart:hover {
+  color: lightgreen;
+  cursor: pointer;
+}
+
+
+.your-toys-links:hover {
+  cursor: pointer;
+}
+
+
+
 
 .navbar {
   width: 100%;
@@ -48,18 +153,13 @@ ul {
   height: 75px;
 }
 
-.auth-links {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 150px;
-  height: 100%;
-  font-family: "Comic Sans MS";
-}
+
 
 .welcome-message {
   font-size: 20px;
 }
+
+
 
 
 
@@ -91,6 +191,7 @@ ul {
   color: black;
   margin-left: 15px;
   transition: color 1.5s;
+  padding-right: 7px;
   padding-top: 15px;
 }
 
@@ -113,11 +214,7 @@ ul {
   color: orange;
 }
 
-.auth-buttons {
-  margin-right: 3%;
-  /* height: 100%; */
-  height: 100%;
-}
+
 
 .logo {
   margin-left: 3%;
