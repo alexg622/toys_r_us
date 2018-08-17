@@ -64,8 +64,6 @@ class UserToys extends React.Component{
   }
 
   render(){
-    console.log("HHHHHHERERERERE");
-    window.props = this.props
     let toys = []
     if(this.props.toys.length > 0) {
       window.toys = this.toysInCart()

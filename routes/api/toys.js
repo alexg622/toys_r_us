@@ -53,7 +53,6 @@ router.patch('/:toyId', (req, res) => {
 // delete toy
 // change later to give user who made toy
 router.delete('/:toyId', (req, res) => {
-  console.log("HERE in toy delete");
   Toy.findById(req.params.ToyId).then(toy => {
     toy.remove().then(toy => res.json(toy))
   })

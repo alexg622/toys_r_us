@@ -92,17 +92,15 @@ class UserCart extends React.Component{
   }
 
   render(){
-    window.props = this.props
     let toys = []
     if(this.props.toys.length > 0) {
-      window.toys = this.toysInCart()
       toys = Object.values(this.toysInCart())
     }
 
     let price = 0
     const outputToys = toys.map((toy, index) => {
       let quantity = parseInt(toy[1])
-      price += quantity * parseInt(toy[0].price)
+      price += quantity * parseInt(toy[0].price, 16)
       return (
         <div key={index} id="newUserCart-div" className="userCart-div">
           <div className="img-links">

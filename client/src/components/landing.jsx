@@ -86,7 +86,6 @@ rotatePriceColor() {
 
   render(){
     let divErrors
-    window.props = this.props
     if (this.props.errors) {
       divErrors = <div className="errors">{this.props.errors.error}</div>
     }
